@@ -20,10 +20,10 @@ This is a guide for installing and using **Stable Diffusion GRisk GUI** & **chai
   
 ## 1. Downloads
 [Python 3.10](https://www.microsoft.com/store/productId/9PJPW5LDXLZ5)  
-[GRisk GUI](https://grisk.itch.io/stable-diffusion-gui (red download button, scroll down))  
-[chaiNNer](https://github.com/joeyballentine/chaiNNer/releases (download the Windows exe from the Assets section of the latest release))  
-[upscale dir.chn](https://drive.google.com/file/d/13H7pYNdbiec_WNA066GZww0aD_Ncehh6/view?usp=sharing)  
-[upscale file.chn](https://drive.google.com/file/d/11E448sFli2zUgPAHSIHmxc7EzxIRQL3A/view?usp=sharing)  
+[GRisk GUI](https://grisk.itch.io/stable-diffusion-gui) (red download button, scroll down)  
+[chaiNNer](https://github.com/joeyballentine/chaiNNer/releases) (download the Windows exe from the Assets section of the latest release)  
+[upscale-dir.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/files/upscale-dir.chn)  
+[upscale-file.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/files/upscale-file.chn)  
 [RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth)  
 [RealESRGAN_x4plus_anime_6B.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth)  
   
@@ -41,8 +41,8 @@ Run the *chaiNNer* and *cuDNN* installers, then you can delete them. Move/Unzip 
 |--
 |--RealESRGAN_x4plus.pth
 |--RealESRGAN_x4plus_anime_6B.pth
-|--upscale dir.chn
-|--upscale file.chn
+|--upscale-dir.chn
+|--upscale-file.chn
 |--
 |--[GRisk Gui] (unzipped)
 |--|
@@ -64,7 +64,7 @@ Launch *Stable Diffusion GRisk GUI.exe*. A command line will open and a UI shoul
 After entering your prompts, hit render. It can't be paused, but you can close the gui to stop it. When it's done, you'll see **Done** in the command line and the image(s) will be output. The speed will depend on your gpu. For 100 steps, mine takes ~30 seconds / image.
   
 ## 6. Up-scaling
-Once you have some images you like, you can upscale them with chaiNNer. Open chaiNNer like a normal app. Then, in the top left, click **File** > **Open**. Find `upscale dir.chn` or `upscale file.chn` that you downloaded earlier. The **file** one is for up-scaling a single file, the **dir** one is for up-scaling everything in a directory.  
+Once you have some images you like, you can upscale them with chaiNNer. Open chaiNNer like a normal app. Then, in the top left, click **File** > **Open**. Find `upscale-dir.chn` or `upscale-file.chn` that you downloaded earlier. The **file** one is for up-scaling a single file, the **dir** one is for up-scaling everything in a directory.  
 For the **file** one, you can click on the **Load Image** node and select an input file (or you can just drag and drop a photo on it).  
 For the **dir** one, you select the directory at the top of the **Image File Iterator** node.  
 The default nodes should be fine, but you can mess with them, it's pretty intuitive. If you're up-scaling "anime" or similar art style, change the model in the upscale node to the `RealESRGAN_x4plus_anime_6B.pth`.  
