@@ -22,8 +22,8 @@ This is a guide for installing and using **Stable Diffusion GRisk GUI** & **chai
 [Python 3.10](https://www.microsoft.com/store/productId/9PJPW5LDXLZ5)  
 [GRisk GUI](https://grisk.itch.io/stable-diffusion-gui) (red download button, scroll down)  
 [chaiNNer](https://github.com/joeyballentine/chaiNNer/releases) (download the Windows exe from the Assets section of the latest release)  
-[upscale-dir.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/files/upscale-dir.chn)  
-[upscale-file.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/files/upscale-file.chn)  
+[upscale-dir.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/releases/download/v1.0.0/upscale-dir.chn)  
+[upscale-file.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/releases/download/v1.0.0/upscale-file.chn)  
 [RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth)  
 [RealESRGAN_x4plus_anime_6B.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth)  
   
