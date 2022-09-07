@@ -1,78 +1,110 @@
 # Stable-Diffusion-Guide
-  
-This is a guide for installing and using **Stable Diffusion GRisk GUI** & **chaiNNer** on Windows with an NVIDIA gpu. It's easy to use once you set it up, but you need to download a few things.  
-  
-<!-- TOC -->
-* [Stable-Diffusion-Guide](#stable-diffusion-guide)
-  * [0. Pre-reqs](#0-pre-reqs)
-  * [1. Downloads](#1-downloads)
-  * [2. Nvidia Downloads](#2-nvidia-downloads)
-  * [3. CLI Downloads](#3-cli-downloads)
-  * [4. Installs](#4-installs)
-  * [5. Generating images](#5-generating-images)
-  * [6. Up-scaling](#6-up-scaling)
-  * [7 Useful Resources](#7-useful-resources)
-<!-- TOC -->
-  
-## 0. Pre-reqs
-- An NVIDIA GPU with at least 4gb of VRAM  
-![img.png](docs/gpus.png)
-  
-## 1. Downloads
-[Python 3.10](https://www.microsoft.com/store/productId/9PJPW5LDXLZ5)  
-[GRisk GUI](https://grisk.itch.io/stable-diffusion-gui) (red download button, scroll down)  
-[chaiNNer](https://github.com/joeyballentine/chaiNNer/releases) (download the Windows exe from the Assets section of the latest release)  
-[upscale-dir.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/releases/download/v1.0.0/upscale-dir.chn)  
-[upscale-file.chn](https://github.com/ArrowM/Stable-Diffusion-Guide/releases/download/v1.0.0/upscale-file.chn)  
-[RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth)  
-[RealESRGAN_x4plus_anime_6B.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth)  
-  
-## 2. Nvidia Downloads
-[cuDDN](https://developer.nvidia.com/compute/cudnn/secure/8.5.0/local_installers/11.7/cudnn-windows-x86_64-8.5.0.96_cuda11-archive.zip)
+This is a guide for installing and using **Stable Diffusion WebUI** on Windows with an NVIDIA gpu
 
-## 3. CLI Downloads
-Open windows command prompt, paste this in, and hit enter.  
-`pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116`
+## 0. Pre-reqs
+- A NVIDIA GPU with at least 4gb of VRAM  
+
+## 1. Download 
+**For git users**, use `git clone`  
+**For others**, click (Code > Download ZIP) on Github & unzip  
+* [Miniconda 3 x64](https://docs.conda.io/en/latest/miniconda.html)  
+* [StableDiffusion Model 1.4](https://drive.yerf.org/wl/?id=EBfTrmcCCUAGaQBXVIj5lJmEhjoP1tgl)  
+* [StableDiffusion WebUI](https://github.com/sd-webui/stable-diffusion-webui/)  
+
+## 2. Install
+* Run the Miniconda installer, default location, install for **all users**  
+* Rename `sd-v1-4.ckpt` to `model.ckpt` and put it in `stable-diffusion-webui/models/ldm/stable-diffusion-v1`  
+* If you only have 4gb of VRAM, see [Running on 4GB](#troubleshooting-running-on-4gb)
+
+## 3. Start
+* Run `webui.cmd` in `stable-diffusion-webui`  
+* Wait patiently while it installs dependencies and does a first time run. It may seem "stuck" but it isn't. It may take up to 10-15 minutes  
+* The command line will show you image generation progress  
+* After it finishes setting up, go to [http://localhost:7860/](http://localhost:7860/)  
+
+## 4. Usage
+### Basics
+There are a bunch of settings, but they are simpler than they look. I will cover the important ones on the **Text-to-Image** tab  
+- `Text Input` - this is where you put your prompts. Generally more detail is good. Words are roughly weighted by order. See [this post](https://www.reddit.com/r/StableDiffusion/comments/x41n87/how_to_get_images_that_dont_suck_a/) for tips
   
-## 4. Installs
-Run the *chaiNNer* and *cuDNN* installers, then you can delete them. Move/Unzip the remaining files, so it's something like  
-```
-[AI]
-|--
-|--RealESRGAN_x4plus.pth
-|--RealESRGAN_x4plus_anime_6B.pth
-|--upscale-dir.chn
-|--upscale-file.chn
-|--
-|--[GRisk Gui] (unzipped)
-|--|
-|--|--Stable Diffusion GRisk GUI.exe (<--- this is what you run)
-```
   
-## 5. Generating images
-Launch *Stable Diffusion GRisk GUI.exe*. A command line will open and a UI should pop up. You can ignore the command line warnings at startup. The command line will show you the generation progress. Change the following:  
-- `Output folder` - this is where you generated images get output  
-- `Steps` - set to **100**  
-- `Resolution` - try **512** x **512** first. If that fails, use **256** x **256**   
-  
-  
-- `Text Inputs` - this is where you put your prompts. You get 1 image for each line. You can repeat lines to get multiple images. Generally more detail is good. For example, I used this prompt for the camping images:  
-  
+- `Width` & `Height` - dimensions of output image. Don't go above **512**, if you get memory errors, lower them until it works  
+- `Classifer Free Guidance Scale` - How strongly the image follows the prompt  
+   (**0 - 4**) AI has a lot of control, high variety  
+   (**5 - 9**) Mixed, medium variety  
+   (**10 - 14**) AI tries to follow very closely, lower variety (don't go above 14)  
+- `Seed` Seed of output image. Usually you want to leave **blank**  
+- `Sampling Steps` - How many iterations the AI refines the image. Higher values = slower. Ideal value depends on **Sampling Method**. Here is an [example](https://i.redd.it/ud12agb7goj91.jpg) of **sampling steps** & **sampling methods**  
+- `Sampling Method` - Scroll down on [this post](https://www.reddit.com/r/StableDiffusion/comments/x41n87/how_to_get_images_that_dont_suck_a/) for some comparisons  
+
+### Starting Recommendations
+- `Classifer Free Guidance Scale` - 7.5   
+- `Sampling Steps` - 10  
+- `Sampling Method` - DDIM  
+Test prompts with **10** steps, then once you starting getting the images you want, increase it to 25-50  
+
+### Output
+- `stable-diffusion-webui/outputs/txt2img-samples` - prompt grids (basically previews)  
+- `stable-diffusion-webui/outputs/txt2img-samples/samples` - contains directories named after your prompts  
+- `stable-diffusion-webui/outputs/txt2img-samples/samples/{example prompt}` - contains full size output images and yaml details file  
+If generating multiple images, output can be viewed in these folders as they generate before the whole batch completes and the UI displays them  
+
+### Example
 ![space-camping](docs/space-camping.jpg)  
 > A Coleman Sundome Camping Tent lit from inside, on the surface of the moon, cinematic lighting, highly detailed, sharp focus, digital painting, art by junji ito and WLOP, professional photoshoot  
-  
-After entering your prompts, hit render. It can't be paused, but you can close the gui to stop it. When it's done, you'll see **Done** in the command line and the image(s) will be output. The speed will depend on your gpu. For 100 steps, mine takes ~30 seconds / image.
-  
-## 6. Up-scaling
-Once you have some images you like, you can upscale them with chaiNNer. Open chaiNNer like a normal app. Then, in the top left, click **File** > **Open**. Find `upscale-dir.chn` or `upscale-file.chn` that you downloaded earlier. The **file** one is for up-scaling a single file, the **dir** one is for up-scaling everything in a directory.  
-For the **file** one, you can click on the **Load Image** node and select an input file (or you can just drag and drop a photo on it).  
-For the **dir** one, you select the directory at the top of the **Image File Iterator** node.  
-The default nodes should be fine, but you can mess with them, it's pretty intuitive. If you're up-scaling "anime" or similar art style, change the model in the upscale node to the `RealESRGAN_x4plus_anime_6B.pth`.  
-  
-To run, hit start at the top.
-  
-Scaled photos will show up in a `[Scaled]` directory inside the input folder (you can change this on the output node).  
-  
-## 7 Useful Resources
-[StableDiffusion wiki (prompt tips)](https://wiki.installgentoo.com/wiki/Stable_Diffusion)  
-[Prompt builder](https://promptomania.com/stable-diffusion-prompt-builder/)  
+
+After entering your prompts, hit **Generate**. When it's done, you'll see **Done** in the command line and the image(s) will be output  
+
+## 5. Up-scaling
+If you want bigger images than **512** x **512**, then you need to use upscaling, which is provided on the **Image Lab** tab  
+
+### Setup
+1. Download the following
+   * [LatentDiffusion](https://github.com/devilismyfriend/latent-diffusion)  
+   unzip and put `latent-diffusion` in `stable-diffusion-webui/src`  
+   * [GFPGANv1.3.pth](https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth)  
+   put in `stable-diffusion-webui/src/gfpgan/experiments/pretrained_models/`  
+   * [RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth) & [RealESRGAN_x4plus_anime_6B.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth)  
+   put in `stable-diffusion-webui/src/realesgran/experiments/pretrained_models/`  
+2. Restart **webui.cmd**  
+
+### Usage
+1. Open the **Image Lab** tab in the UI  
+2. Select your photo  
+3. Choose your processors (1 or both)  
+4. Processor settings  
+
+### Processor Settings
+#### FaceFix
+`Effect strength` - leave at **100**  
+#### Upscaling
+`Upscaler Selection` - descriptions can be found on the left of the page under **Process**  
+`RealESRGAN model` - leave as `x4plus` unless you are upscaling "anime", in which case select `x4plus_anime`  
+#### Upscaling (GoBig & GoLatent)
+These settings are the same as **Text-to-Image**. A prompt can be added to influence changes  
+
+### Output
+- `stable-diffusion-webui/outputs/imglab-samples` - output parent directory  
+- `stable-diffusion-webui/outputs/imglab-samples/{upscale type}` - full size upscaled images  
+
+## Useful Resources
+* [StableDiffusion wiki (prompt tips)](https://wiki.installgentoo.com/wiki/Stable_Diffusion)
+* [Prompt builder](https://promptomania.com/stable-diffusion-prompt-builder/)
+
+## Troubleshooting: RUNNING ON 4GB
+It is possible to run the Stable Diffusion webui on 4gb Vram with some modifications:
+
+1. Edit `/scripts/relauncher.py` in your preferred text editor  
+2. Change line 8 in `relauncher.py` FROM "`python scripts/webui.py`" to the following:  
+"`python scripts/webui.py --optimized`" and save  
+(This tells it to optimize VRAM by generating incrementally, it should be noticed that this sacrifices generation speed)  
+3. Launch webui.cmd like normal  
+
+**If you are still getting an 'Out of Memory' error:**  
+Delete or rename the ESRGAN and GFPGAN models (so they don't load into memory) and relaunch  
+(You can use them both as external programs anyway)  
+
+**If your output is a solid green square (known problem on GTX 16xx):**  
+Add "`--precision full --no-half`" to the launch parameters above, it should look like this:  
+"`python scripts/webui.py --precision full --no-half --optimized`"  
+Unfortunately, the full precision fix raises ram use drastically, so you may have to moderately reduce your output to **448** x **448** if on 4gb  
